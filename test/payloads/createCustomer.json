@@ -1,0 +1,13 @@
+{
+	"name": "Leonardo Nascimento",
+	"email": "pagaleve@teste.com",
+	"phoneNumber": "41995348888",
+	"postalAddress": {
+		"countryCode": "+55",
+		"region": "BR",
+		"locality": "Curitiba - PR",
+		"postalCode": "81910-000",
+		"street": "Av. Maringá",
+		"number": 256
+	}
+}
