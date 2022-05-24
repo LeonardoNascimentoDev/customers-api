@@ -2,12 +2,12 @@ import { Type } from 'class-transformer'
 import { PostalAddressDTO } from "./PostalAddressDTO"
 import { IsEmail, IsNotEmpty, IsString, ValidateNested } from 'class-validator'
 
-export class SaveCustomerDTO {
+export class CustomerDTO {
 
     @IsNotEmpty()
     @IsString()
     id: string = null
-    
+
     @IsNotEmpty()
     @IsString()
     name: string = null

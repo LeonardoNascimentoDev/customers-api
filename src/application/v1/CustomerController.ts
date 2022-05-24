@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { SaveCustomerDTO } from '../../domain/dto/SaveCustomerDTO';
+import { CustomerDTO } from '../../domain/dto/CustomerDTO';
 import { Customer } from '../../domain/model/Customer';
 import CustomerService from '../../service/CustomerService';
 
@@ -13,7 +13,7 @@ export class CustomerController {
     }
 
     @Post('save')
-    async saveCustomer(@Body() payload: SaveCustomerDTO): Promise<Customer> {
+    async saveCustomer(@Body() payload: CustomerDTO): Promise<Customer> {
         return this.customerService.executeSave(payload);
     }
 
@@ -23,18 +23,18 @@ export class CustomerController {
     }
 
     @Put(':id')
-    async atualizar(@Param('id') id: string, @Body() customerUpdated: SaveCustomerDTO): Promise<Customer> {
+    async update(@Param('id') id: string, @Body() customerUpdated: CustomerDTO): Promise<Customer> {
         return this.customerService.executeUpdate(id, customerUpdated);
     }
 
     @Delete(':id')
-    async remover(@Param('id') id: string): Promise<Customer> {
+    async delete(@Param('id') id: string): Promise<Customer> {
         return this.customerService.deleteById(id);
     }
 
     @Get('find/byFilter')
-    async getHello(@Query() query: Customer): Promise<Customer[]> {
+    async search(@Query() query: CustomerDTO): Promise<Customer[]> {
         return this.customerService.searchCustomer(query);
     }
-  
+
 }
