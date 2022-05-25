@@ -1,0 +1,158 @@
+swagger: "2.0"
+info:
+  description: "Api for customers"
+  version: "0.1.0"
+  title: "Customers - API"
+host: "localhost:3000"
+basePath: "/"
+tags:
+  - name: "customers"
+    description: "Customer related routes"
+securityDefinitions:
+  APIKeyHeader:
+    type: apiKey
+    in: header
+    name: x-api-key
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /api/v1/customers:
+    get:
+      tags:
+        - "customers"
+      summary: "Service that returns the list of customers"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Returns the list of all registered customers"
+          schema:
+            $ref: "#/definitions/Customer"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+  /api/v1/customers/save:
+    post:
+      tags:
+        - "customers"
+      summary: "Customer registration"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Customer registration"
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+      responses:
+        "200":
+          description: "Customer create"
+          schema:
+            $ref: "#/definitions/Customer"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+  /api/v1/customers/find/byFilter:
+    get:
+      tags:
+        - "customers"
+      summary: "Search customer ById"
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          type: string
+      description: ""
+      responses:
+        "200":
+          description: "Search customer by id"
+          schema:
+            $ref: "#/definitions/Customer"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+  /api/v1/customers/{id}:
+    put:
+      tags:
+        - "customers"
+      summary: "Edit costumer ById"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          type: string
+        - in: "body"
+          name: "body"
+          description: "Edit customer by id"
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+      responses:
+        "200":
+          description: "Customer updated"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+        - "customers"
+      summary: "Delete customer by id"
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          type: string
+      description: ""
+      responses:
+        "200":
+          description: "Customer deleted"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Internal Server Error"
+definitions:
+  Customer:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      phoneNumber:
+        type: "string"
+      postalAddress:
+        type: "object"
+        properties:
+          countryCode:
+            type: "string"
+          region:
+            type: "string"
+          locality:
+            type: "string"
+          postalCode:
+            type: "string"
+          street:
+            type: "string"
+          number:
+            type: "integer"

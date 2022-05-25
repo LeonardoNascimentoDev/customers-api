@@ -32,6 +32,7 @@
     "objectypes": "^1.2.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "serverless": "^3.18.2",
     "typescript": "^4.6.4"
   },
   "devDependencies": {
