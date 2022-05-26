@@ -6,9 +6,9 @@ import { Customer } from '../domain/model/Customer';
 @Injectable()
 export class CustomerRepository {
     constructor(
-    @InjectModel(Customer.name) private customerModel: Model<Customer>
-    ) {}
-    
+        @InjectModel(Customer.name) private customerModel: Model<Customer>
+    ) { }
+
     async findAll(): Promise<Customer[]> {
         return this.customerModel.find().exec();
     }
@@ -38,7 +38,7 @@ export class CustomerRepository {
 
     async searchCustomer(query: Customer): Promise<Customer[]> {
         const qy = {}
-        Object.getOwnPropertyNames(query).map(q => { qy[q] = { $regex: `.*${query[q]}.*` } }) 
+        Object.getOwnPropertyNames(query).map(q => { qy[q] = { $regex: `.*${query[q]}.*` } })
         return this.customerModel.find(qy).exec();
     }
 
