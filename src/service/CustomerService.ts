@@ -27,14 +27,12 @@ export default class CustomerService {
             const keyName = payload.name + '_' + new Date().getTime();
             const base64result = payload.imgProfile.substr(payload.imgProfile.indexOf(',') + 1);
             const buff = Buffer.from(base64result, 'base64');
-
             const params = {
                 Bucket: process.env.BUCKET_NAME,
                 Body: buff,
                 Key: `updados/${keyName}​​​​​​​​`,
                 ContentType: formato,
             };
-            console.log(params)
             await s3.putObject(params);
 
             const date = new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
