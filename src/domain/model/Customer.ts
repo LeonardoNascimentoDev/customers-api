@@ -4,16 +4,16 @@ import PostalAddressDTO from './PostalAddressDTO';
 @Schema()
 export class Customer {
 
-     @Prop({ name: 'id' , nullable: true })
-     id: string 
+     @Prop({ name: 'id', nullable: true })
+     id: string
 
-     @Prop({ name: 'name' , nullable: true })
-     name: string 
-     
-     @Prop({ name: 'email' , nullable: true })
+     @Prop({ name: 'name', nullable: true })
+     name: string
+
+     @Prop({ name: 'email', nullable: true })
      email: string
 
-     @Prop({ name: 'phoneNumber' , nullable: true })
+     @Prop({ name: 'phoneNumber', nullable: true })
      phoneNumber: string
 
      @Prop({ nullable: true })
@@ -21,6 +21,9 @@ export class Customer {
 
      @Prop({ nullable: true })
      lastModifyDate: Date
+
+     @Prop({ nullable: false })
+     imgProfile: string
 
      @Prop({ type: PostalAddressDTO })
      postalAddress: PostalAddressDTO = new PostalAddressDTO()

@@ -20,6 +20,9 @@ export class CustomerDTO {
     @IsString()
     phoneNumber: string = null
 
+    @IsString()
+    imgProfile: string = null
+
     registerDate: Date = null
 
     lastModifyDate: Date = null

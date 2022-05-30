@@ -25,7 +25,7 @@ describe('CustomerService', () => {
         it('Request get all customers', async () => {
             const findAllCostumer = await cs.getAll();
             expect(findAllCostumer)
-        }, 2000)
+        }, 5000)
     })
     describe('createCostumer()', () => {
         it('Request save costumer', async () => {

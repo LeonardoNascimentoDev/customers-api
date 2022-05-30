@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-// Import { buildObject } from 'objectypes'
 import { Customer } from '../domain/model/Customer'
 import { CustomerDTO } from '../domain/dto/CustomerDTO'
 import { CustomerRepository } from '../repository/CustomerRepository'
+const S3 = require('../infra/s3');
 
 @Injectable()
 export default class CustomerService {
@@ -18,6 +18,25 @@ export default class CustomerService {
         const customer = await this.repository.findCustomer(payload)
 
         if (!customer) {
+            let formato = payload.imgProfile.substring(
+                payload.imgProfile.indexOf(':') + 1,
+                payload.imgProfile.indexOf(';base64'),
+            );
+
+            const s3 = new S3();
+            const keyName = payload.name + '_' + new Date().getTime();
+            const base64result = payload.imgProfile.substr(payload.imgProfile.indexOf(',') + 1);
+            const buff = Buffer.from(base64result, 'base64');
+
+            const params = {
+                Bucket: process.env.BUCKET_NAME,
+                Body: buff,
+                Key: `updados/${keyName}​​​​​​​​`,
+                ContentType: formato,
+            };
+            console.log(params)
+            await s3.putObject(params);
+
             const date = new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
             payload.registerDate = date
             payload.lastModifyDate = date
