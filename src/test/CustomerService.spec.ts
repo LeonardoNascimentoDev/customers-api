@@ -2,8 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { AppModule } from '../AppModule'
 import CustomerService from '../service/CustomerService'
 import { CustomerRepository } from '../repository/CustomerRepository'
-import { customerFindIdMock } from './mocks/CustomerFindIdMock'
-import { updateCustomerMock } from './mocks/UpdateCustomerMock'
 import { customerMock } from './mocks/CustomerMock'
 
 describe('CustomerService', () => {
@@ -29,13 +27,11 @@ describe('CustomerService', () => {
             expect(findAllCostumer)
         }, 2000)
     })
-
-
     describe('createCostumer()', () => {
         it('Request save costumer', async () => {
             customer = await cs.executeSave(customerMock);
             const findCostumer = await cr.findByCustomerById(customer._id);
-            expect(customer.name)
+            expect(customer.name).toBe(findCostumer.name);
             expect(customer.email).toBe(findCostumer.email);
             expect(customer.phoneNumber).toBe(findCostumer.phoneNumber);
             expect(customer.postalAddress.countryCode).toBe(findCostumer.postalAddress.countryCode);
@@ -49,31 +45,37 @@ describe('CustomerService', () => {
 
     describe('findCustomerById()', () => {
         it('Request get customer ById', async () => {
-            const findCostumer = await cr.findByCustomerById(customerFindIdMock.id);
-            expect(findCostumer.name)
-            expect(findCostumer.email)
-            expect(findCostumer.phoneNumber)
-            expect(findCostumer.postalAddress.countryCode)
-            expect(findCostumer.postalAddress.region)
-            expect(findCostumer.postalAddress.locality)
-            expect(findCostumer.postalAddress.postalCode)
-            expect(findCostumer.postalAddress.street)
-            expect(findCostumer.postalAddress.number)
+            const findCustumer = await cr.findByCustomerById(customer._id);
+            expect(findCustumer.name).toBe(customer.name)
+            expect(findCustumer.email).toBe(customer.email)
+            expect(findCustumer.phoneNumber).toBe(customer.phoneNumber)
+            expect(findCustumer.postalAddress.countryCode).toBe(customer.postalAddress.countryCode)
+            expect(findCustumer.postalAddress.region).toBe(customer.postalAddress.region)
+            expect(findCustumer.postalAddress.locality).toBe(customer.postalAddress.locality)
+            expect(findCustumer.postalAddress.postalCode).toBe(customer.postalAddress.postalCode)
+            expect(findCustumer.postalAddress.street).toBe(customer.postalAddress.street)
+            expect(findCustumer.postalAddress.number).toBe(customer.postalAddress.number)
+        }, 2000)
+    })
+    describe('updateCustomer()', () => {
+        it('Request update customer ById', async () => {
+            const updateCustumer = await cr.update(customer._id, customer);
+            expect(updateCustumer.name).toBe(customer.name)
+            expect(updateCustumer.email).toBe(customer.email)
+            expect(updateCustumer.phoneNumber).toBe(customer.phoneNumber)
+            expect(updateCustumer.postalAddress.countryCode).toBe(customer.postalAddress.countryCode)
+            expect(updateCustumer.postalAddress.region).toBe(customer.postalAddress.region)
+            expect(updateCustumer.postalAddress.locality).toBe(customer.postalAddress.locality)
+            expect(updateCustumer.postalAddress.postalCode).toBe(customer.postalAddress.postalCode)
+            expect(updateCustumer.postalAddress.street).toBe(customer.postalAddress.street)
+            expect(updateCustumer.postalAddress.number).toBe(customer.postalAddress.number)
         }, 2000)
     })
 
-    describe('updateCustomer()', () => {
-        it('Request update customer ById', async () => {
-            const findCostumer = await cr.update(updateCustomerMock.id, updateCustomerMock);
-            expect(findCostumer.name)
-            expect(findCostumer.email)
-            expect(findCostumer.phoneNumber)
-            expect(findCostumer.postalAddress.countryCode)
-            expect(findCostumer.postalAddress.region)
-            expect(findCostumer.postalAddress.locality)
-            expect(findCostumer.postalAddress.postalCode)
-            expect(findCostumer.postalAddress.street)
-            expect(findCostumer.postalAddress.number)
+    describe('deleteCustomer()', () => {
+        it('Request delete customer ById', async () => {
+            const customerDeleted = await cr.deleteById(customer._id);
+            expect(customerDeleted)
         }, 2000)
     })
 })
