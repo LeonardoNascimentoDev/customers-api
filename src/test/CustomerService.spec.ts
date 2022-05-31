@@ -34,6 +34,7 @@ describe('CustomerService', () => {
             expect(customer.name).toBe(findCostumer.name);
             expect(customer.email).toBe(findCostumer.email);
             expect(customer.phoneNumber).toBe(findCostumer.phoneNumber);
+            expect(customer.imgProfile).toBe(findCostumer.imgProfile);
             expect(customer.postalAddress.countryCode).toBe(findCostumer.postalAddress.countryCode);
             expect(customer.postalAddress.region).toBe(findCostumer.postalAddress.region);
             expect(customer.postalAddress.locality).toBe(findCostumer.postalAddress.locality);
@@ -49,6 +50,7 @@ describe('CustomerService', () => {
             expect(findCustumer.name).toBe(customer.name)
             expect(findCustumer.email).toBe(customer.email)
             expect(findCustumer.phoneNumber).toBe(customer.phoneNumber)
+            expect(findCustumer.imgProfile).toBe(customer.imgProfile);
             expect(findCustumer.postalAddress.countryCode).toBe(customer.postalAddress.countryCode)
             expect(findCustumer.postalAddress.region).toBe(customer.postalAddress.region)
             expect(findCustumer.postalAddress.locality).toBe(customer.postalAddress.locality)
@@ -63,6 +65,7 @@ describe('CustomerService', () => {
             expect(updateCustumer.name).toBe(customer.name)
             expect(updateCustumer.email).toBe(customer.email)
             expect(updateCustumer.phoneNumber).toBe(customer.phoneNumber)
+            expect(updateCustumer.imgProfile).toBe(customer.imgProfile);
             expect(updateCustumer.postalAddress.countryCode).toBe(customer.postalAddress.countryCode)
             expect(updateCustumer.postalAddress.region).toBe(customer.postalAddress.region)
             expect(updateCustumer.postalAddress.locality).toBe(customer.postalAddress.locality)

@@ -18,11 +18,10 @@ export default class CustomerService {
         const customer = await this.repository.findCustomer(payload)
 
         if (!customer) {
-            let formato = payload.imgProfile.substring(
+            const format = payload.imgProfile.substring(
                 payload.imgProfile.indexOf(':') + 1,
                 payload.imgProfile.indexOf(';base64'),
             );
-
             const s3 = new S3();
             const keyName = payload.name + '_' + new Date().getTime();
             const base64result = payload.imgProfile.substr(payload.imgProfile.indexOf(',') + 1);
@@ -31,10 +30,9 @@ export default class CustomerService {
                 Bucket: process.env.BUCKET_NAME,
                 Body: buff,
                 Key: `updados/${keyName}​​​​​​​​`,
-                ContentType: formato,
+                ContentType: format,
             };
             await s3.putObject(params);
-
             const date = new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
             payload.registerDate = date
             payload.lastModifyDate = date
