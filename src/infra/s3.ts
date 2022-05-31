@@ -3,7 +3,7 @@ AWS.config.update({ region: 'REGION' });
 
 
 module.exports = class S3 {
-    s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+    s3 = new AWS.S3();
 
     constructor() {
         this.s3 = new AWS.S3({ region: process.env.REGION });
